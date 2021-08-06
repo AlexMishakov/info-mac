@@ -25,6 +25,8 @@ class MyServer(BaseHTTPRequestHandler):
             status_string = subprocess.check_output("pmset -g log|grep -e \" Notification  \"", shell=True)
             self.wfile.write(bytes(str(status_string).replace("\\n", "<br>").replace("\"", "").replace("\\t", "    "), "utf-8"))
             self.wfile.write(bytes("</body></html>", "utf-8"))
+        elif self.path == "/battery/status":
+            self.wfile.write(bytes(str(self.battery_status()), "utf-8"))
         elif self.path == "/stop":
             exit()
         else:
@@ -44,6 +46,10 @@ class MyServer(BaseHTTPRequestHandler):
             self.sleep_mod = 0
         
         return self.sleep_mod
+
+    def battery_status(self):
+        status_string = subprocess.check_output("pmset -g batt | grep -Eo \"\d+%\" | cut -d% -f1", shell=True)
+        return status_string.decode('ascii')
 
 if __name__ == "__main__":
     webServer = HTTPServer((hostName, serverPort), MyServer)
