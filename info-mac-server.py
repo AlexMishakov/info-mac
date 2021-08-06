@@ -25,12 +25,11 @@ class MyServer(BaseHTTPRequestHandler):
             status_string = subprocess.check_output("pmset -g log|grep -e \" Notification  \"", shell=True)
             self.wfile.write(bytes(str(status_string).replace("\\n", "<br>").replace("\"", "").replace("\\t", "    "), "utf-8"))
             self.wfile.write(bytes("</body></html>", "utf-8"))
+        elif self.path == "/stop":
+            exit()
         else:
-            self.wfile.write(bytes("<html><head><title>Info your mac</title></head>", "utf-8"))
-            self.wfile.write(bytes("<body>", "utf-8"))
-            self.wfile.write(bytes("<p><a href=\"/sleep_mode/status\">sleep_mode</a></p>", "utf-8"))
-            self.wfile.write(bytes("<p><a href=\"/sleep_mode/log\">sleep_mode/log</a></p>", "utf-8"))
-            self.wfile.write(bytes("</body></html>", "utf-8"))
+            html_file = open("assets/index.html", "r").read()
+            self.wfile.write(bytes(html_file, "utf-8"))
     
     def check_sleep_mode(self):
         status_string = subprocess.check_output("pmset -g log|grep -e \" Notification  \"", shell=True)
