@@ -34,15 +34,16 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(bytes(html_file, "utf-8"))
     
     def check_sleep_mode(self):
-        status_string = subprocess.check_output("pmset -g log|grep -e \" Notification  \"", shell=True)
-        status_array = str(status_string).split("\\n")
-        status_last_array = status_array[-2].split("\\t")
-        status = status_last_array[1].replace(" ", "")
+        status_string = subprocess.check_output("pmset -g log|grep -e \" Notification  \"", shell=True).decode('ascii')
+        status_array = str(status_string).split("\n")
+        status_last_array = status_array[-2].split("\t")
+        status = status_last_array[1]
+        status =  re.sub("\s\s+", " ", status) 
         
-        if status == "Displayisturnedon":
+        if status == "Display is turned on ":
             self.sleep_mod = 1
 
-        if status == "Displayisturnedoff":
+        if status == "Display is turned off ":
             self.sleep_mod = 0
         
         return self.sleep_mod
