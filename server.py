@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from os import replace
 import subprocess
@@ -8,6 +9,8 @@ hostName = re.sub("[b|'|n|\\\]", "", hostName)
 serverPort = 7777
 
 class MyServer(BaseHTTPRequestHandler):
+    sleep_mod = 1
+
     def do_GET(self):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
@@ -36,10 +39,12 @@ class MyServer(BaseHTTPRequestHandler):
         status = status_last_array[1].replace(" ", "")
         
         if status == "Displayisturnedon":
-            return 1
+            self.sleep_mod = 1
 
         if status == "Displayisturnedoff":
-            return 0
+            self.sleep_mod = 0
+        
+        return self.sleep_mod
 
 if __name__ == "__main__":
     webServer = HTTPServer((hostName, serverPort), MyServer)
