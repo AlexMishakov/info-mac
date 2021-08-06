@@ -22,8 +22,8 @@ class MyServer(BaseHTTPRequestHandler):
         elif self.path == "/sleep_mode/log":
             self.wfile.write(bytes("<html><head><title>Status macbook</title></head>", "utf-8"))
             self.wfile.write(bytes("<body>", "utf-8"))
-            status_string = subprocess.check_output("pmset -g log|grep -e \" Notification  \"", shell=True)
-            self.wfile.write(bytes(str(status_string).replace("\\n", "<br>").replace("\"", "").replace("\\t", "    "), "utf-8"))
+            status_string = subprocess.check_output("pmset -g log|grep -e \" Notification  \"", shell=True).decode('ascii')
+            self.wfile.write(bytes(str(status_string).replace("\n", "<br>"), "utf-8"))
             self.wfile.write(bytes("</body></html>", "utf-8"))
         elif self.path == "/battery/status":
             self.wfile.write(bytes(str(self.battery_status()), "utf-8"))
