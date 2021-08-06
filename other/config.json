@@ -1,0 +1,27 @@
+{
+    "bridge": {
+        "name": "Homebridge",
+        "username": "XX:XX:XX:XX:XX:XX",
+        "port": 51383,
+        "pin": "XXX-XX-XXX"
+    },
+    "description": "Your description here",
+    "accessories": [
+        {
+            "accessory": "ContactSensor",
+            "name": "MacBook Display",
+            "pollInterval": 500,
+            "statusUrl": "http://<your_mac_ip>:7777/sleep_mode/status"
+        },
+        {
+            "accessory": "HttpAmbientLightSensor",
+            "name": "MacBook battery",
+            "getUrl": "http://<your_mac_ip>:7777/battery/status",
+            "minValue": 0,
+            "maxValue": 100
+        }
+    ],
+    "platforms": [
+
+    ]
+}
