@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/assets/images/logo/Logo@0,3x.png?raw=true" alt="Repo logo"/>
+  <img src="/assets/images/logo/Logo@0,3x.png?raw=true" alt="Repository logo"/>
 </p>
 
 <span align="center">
@@ -8,13 +8,13 @@
 
 </span>
 
-<img src="/exapmle.gif" align="right" alt="Turn on">
+<img src="/other/turn_on.gif" align="right" alt="Turn on">
 
 Вы можете интегрировать некоторые показатели Вашего Mac в [Apple HomeKit](https://www.apple.com/ios/home/) через мост [Homebridge](https://homebridge.io) в виде датчиков. Скрипт предоставляет доступ к информации Вашего Mac через Web API. Данный проект также можно использовать для других интеграций. 
 
 ## Установка и запуск
 1. Установите последнюю версию [Python 3](https://www.python.org/downloads/). 
-2. Скачайте программу и запустите. 
+2. [Скачайте](https://github.com/AlexMishakov/info-mac/releases/) программу и запустите. 
 
 Программа работает в фоновом режиме, поэтому проверить её работу можно в мониторинге системы. 
 
